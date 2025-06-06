@@ -23,15 +23,31 @@
 .character {
   display: flex;
   flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
   gap: 1em;
-  max-width: 500px;
-  width: 100%;
 }
 
 .character-buttons {
   display: flex;
   justify-content: center;
   gap: 1em;
+}
+
+.character-buttons button {
+  flex: 1;
+  padding: 1em 0;
+  font-size: 1em;
+  border-radius: 12px;
+  border: none;
+  background-color: #ff8cb3;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.character-buttons button:hover {
+  background-color: #ff5c94;
 }
 
 button {
@@ -81,29 +97,33 @@ button:hover {
   <h1>🎁 Reward Yourself!</h1>
   <p>You have <strong><span id="ticketCount">0</span></strong> tickets</p>
   <button onclick="earnTicket()">+ Earn Ticket</button>  <div class="character">
-    <div class="character-buttons">
-      <button onclick="getReward('Samira', this)">🎮 Samira</button>
-      <button onclick="getReward('Kamui', this)">🕹️ Kamui</button>
+
+    <div class="character">
+  <div class="character-buttons">
+    <button onclick="getReward('Samira')">🎮 Samira</button>
+    <button onclick="getReward('Kamui')">🕹️ Kamui</button>
+  </div>
+  <div class="character-buttons">
+    <button onclick="getReward('Shea')">🍃 Shea</button>
+    <button onclick="getReward('Chrome')">☕ Chrome</button>
+  </div>
+  <div class="character-buttons">
+    <button onclick="getReward('Sasha')">🎢 Sasha</button>
+    <button onclick="getReward('Camu')">🌌 Camu</button>
+  </div>
+  <div class="character-buttons">
+    <button onclick="getReward('Wanshi')">😴 Wanshi</button>
+    <button onclick="getReward('Stephanie')">🕌 Stephanie</button>
+  </div>
     </div>
-    <div class="character-buttons">
-      <button onclick="getReward('Shea', this)">🍃 Shea</button>
-      <button onclick="getReward('Chrome', this)">☕ Chrome</button>
-    </div>
-    <div class="character-buttons">
-      <button onclick="getReward('Sasha', this)">🎢 Sasha</button>
-      <button onclick="getReward('Camu', this)">🌌 Camu</button>
-    </div>
-    <div class="character-buttons">
-      <button onclick="getReward('Wanshi', this)">😴 Wanshi</button>
-      <button onclick="getReward('Stephanie', this)">🕌 Stephanie</button>
-    </div>
-  </div>  <ul id="reward-log"></ul>  <script>
+    
+    <ul id="reward-log"></ul>  <script>
     const rewards = {
       Samira: ["A new game day!", "Time for a solo play session", "Steam gift card (imaginary but empowering)", "She compliments your strategy", "Double XP — you’ve earned it!"],
       Kamui: ["A calm afternoon of handheld gaming", "A mysterious relic from an old RPG", "Kamui nods quietly in approval", "An hour of nostalgic tunes", "A mini mission: hydrate + stretch!"],
       Shea: ["A walk among trees, real or imagined", "A leaf-shaped trinket of calm", "Deep breath challenge — 3x slow inhales", "A poetry line to carry today", "Permission to cancel everything and just *exist*"],
       Chrome: ["Café date with philosophical debates", "A warm pastry + the *good* tea", "A fancy notebook to write your dreams in", "A coffee break with background jazz", "An hour to just read, guilt-free"],
-      Sasha: ["A spontaneous amusement park adventure", "A dance break right now — she dares you!", "A sugary treat + hyper chat session", "She shouts your name like you're famous", "30 minutes of chaos — permission to scream, laugh, go wild!"],
+      Sasha: [,"A spontaneous amusement park adventure", "A dance break right now — she dares you!", "A sugary treat + hyper chat session", "She shouts your name like you're famous", "30 minutes of chaos — permission to scream, laugh, go wild!"],
       Camu: ["A quiet night with your favorite playlist", "A midnight walk under the stars", "Permission to journal something raw", "A cryptic compliment you’ll think about for days", "Lights off, headphones in, and *feel* everything"],
       Wanshi: ["A 30-minute nap card — valid always", "Fuzzy blanket + nothingness", "Sleepy tea time with no obligations", "A do-nothing day — doctor’s orders", "Permission to bail and go rest"],
       Stephanie: ["A Turkish movie night — with food, of course", "She teaches you a curse word (lovingly)", "Baklava and a long story about her family", "Dance practice — she won't take no", "A reminder that you are *strong*, no matter what"]
