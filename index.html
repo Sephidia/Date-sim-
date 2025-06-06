@@ -6,11 +6,12 @@
   <style>
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(#ffeaf4, #ffd1e3);
+      background: var(--bg, linear-gradient(#ffeaf4, #ffd1e3));
       color: #333;
       padding: 2em;
       text-align: center;
       overflow-x: hidden;
+      transition: background 0.6s ease;
     }
     h1 {
       font-size: 3em;
@@ -54,23 +55,23 @@
       position: absolute;
       width: 10px;
       height: 10px;
-      background: radial-gradient(circle, #fff 0%, #ffb6c1 80%, transparent 100%);
+      background: radial-gradient(circle, #fff 0%, #ff1493 70%, transparent 100%);
       border-radius: 50%;
       animation: sparkle 1s ease-out forwards;
       pointer-events: none;
       z-index: 1000;
-    }@keyframes sparkle {
-  0% {
-    transform: scale(0.5);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2.5);
-    opacity: 0;
-    top: -50px;
-  }
-}
-
+    }
+    @keyframes sparkle {
+      0% {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(2.5);
+        opacity: 0;
+        top: -50px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -148,6 +149,17 @@
       ]
     };
 
+    const themes = {
+      Samira: "linear-gradient(to bottom right, #ff8cb3, #ffc1ff)",
+      Kamui: "linear-gradient(to bottom right, #c2e9fb, #a1c4fd)",
+      Shea: "linear-gradient(to bottom right, #d4fc79, #96e6a1)",
+      Chrome: "linear-gradient(to bottom right, #d7d2cc, #304352)",
+      Sasha: "linear-gradient(to bottom right, #ff6a00, #ee0979)",
+      Camu: "linear-gradient(to bottom right, #434343, #000000)",
+      Wanshi: "linear-gradient(to bottom right, #c9d6ff, #e2e2e2)",
+      Stephanie: "linear-gradient(to bottom right, #ffecd2, #fcb69f)"
+    };
+
     let tickets = parseInt(localStorage.getItem('tickets')) || 0;
     let log = JSON.parse(localStorage.getItem('log')) || [];
 
@@ -181,6 +193,7 @@
       localStorage.setItem('log', JSON.stringify(log));
       tickets--;
       localStorage.setItem('tickets', tickets);
+      document.body.style.setProperty('--bg', themes[character]);
       updateDisplay();
       sparkleBurst();
     }
