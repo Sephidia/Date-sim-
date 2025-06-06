@@ -41,10 +41,10 @@
     }
 
     .character-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  margin: 0.5em 0;
+  gap: 1em;
     }
 
     .log {
@@ -89,15 +89,24 @@
   <button onclick="earnTicket()">I Did a Hard Thing!</button>
 
   <div class="character-buttons">
-    <button onclick="getReward('Samira', this)">🎮 Samira</button>
-    <button onclick="getReward('Kamui', this)">🕹️ Kamui</button>
-    <button onclick="getReward('Shea', this)">🍃 Shea</button>
-    <button onclick="getReward('Chrome', this)">☕ Chrome</button>
-    <button onclick="getReward('Sasha', this)">🎢 Sasha</button>
-    <button onclick="getReward('Camu', this)">🌌 Camu</button>
-    <button onclick="getReward('Wanshi', this)">😴 Wanshi</button>
-    <button onclick="getReward('Stephanie', this)">🕌 Stephanie</button>
-  </div>
+  <button onclick="getReward('Samira', this)">🎮 Samira</button>
+  <button onclick="getReward('Kamui', this)">🕹️ Kamui</button>
+</div>
+
+<div class="character-buttons">
+  <button onclick="getReward('Shea', this)">🍃 Shea</button>
+  <button onclick="getReward('Chrome', this)">☕ Chrome</button>
+</div>
+
+<div class="character-buttons">
+  <button onclick="getReward('Sasha', this)">🎢 Sasha</button>
+  <button onclick="getReward('Camu', this)">🌌 Camu</button>
+</div>
+
+<div class="character-buttons">
+  <button onclick="getReward('Wanshi', this)">😴 Wanshi</button>
+  <button onclick="getReward('Stephanie', this)">🕌 Stephanie</button>
+</div>
 
   <div class="log">
     <h2>📝 Reward Log</h2>
