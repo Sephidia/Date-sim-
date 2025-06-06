@@ -1,176 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reward Yourself!</title>
   <style>
+    :root {
+      --bg: linear-gradient(to bottom right, #fff, #eee);
+    }
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: var(--bg, linear-gradient(#ffeaf4, #ffd1e3));
-      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      margin: 0;
       padding: 2em;
-      text-align: center;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       transition: background 0.6s ease;
-    }
+    }h1 {
+  margin-bottom: 0.5em;
+}
 
-    h1 {
-      font-size: 3em;
-      margin-bottom: 1em;
-    }
+.character {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 500px;
+  width: 100%;
+}
 
-    button {
-      margin: 0.5em;
-      padding: 1em 2em;
-      border: none;
-      border-radius: 12px;
-      background-color: #ff8cb3;
-      color: white;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.3s, transform 0.1s;
-    }
-
-    button:hover {
-      background-color: #ff5c94;
-    }
-
-    button:active {
-      transform: scale(0.95);
-    }
-
-    .character-buttons {
+.character-buttons {
   display: flex;
   justify-content: center;
-  margin: 0.5em 0;
   gap: 1em;
-    }
+}
 
-    .log {
-      margin-top: 2em;
-      background: white;
-      padding: 1em;
-      border-radius: 10px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: left;
-    }
+button {
+  padding: 0.7em 1.2em;
+  font-size: 1em;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
 
-    .sparkle {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: radial-gradient(circle, #ff66cc 0%, #ff1493 80%, transparent 100%);
-      border-radius: 50%;
-      animation: sparkle 1s ease-out forwards;
-      pointer-events: none;
-      z-index: 1000;
-    }
+button:hover {
+  transform: scale(1.05);
+}
 
-    @keyframes sparkle {
-      0% {
-        transform: scale(0.5);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(2.5);
-        opacity: 0;
-        top: -50px;
-      }
-    }
+.sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-40px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+#reward-log {
+  margin-top: 2em;
+  max-width: 400px;
+  width: 100%;
+}
+
   </style>
 </head>
 <body>
-  <h1>🎀 Reward Yourself! 🎀</h1>
-  <p><strong>Tickets:</strong> <span id="ticketCount">0</span></p>
-  <button onclick="earnTicket()">I Did a Hard Thing!</button>
-
-  <div class="character-buttons">
-  <button onclick="getReward('Samira', this)">🎮 Samira</button>
-  <button onclick="getReward('Kamui', this)">🕹️ Kamui</button>
-</div>
-
-<div class="character-buttons">
-  <button onclick="getReward('Shea', this)">🍃 Shea</button>
-  <button onclick="getReward('Chrome', this)">☕ Chrome</button>
-</div>
-
-<div class="character-buttons">
-  <button onclick="getReward('Sasha', this)">🎢 Sasha</button>
-  <button onclick="getReward('Camu', this)">🌌 Camu</button>
-</div>
-
-<div class="character-buttons">
-  <button onclick="getReward('Wanshi', this)">😴 Wanshi</button>
-  <button onclick="getReward('Stephanie', this)">🕌 Stephanie</button>
-</div>
-
-  <div class="log">
-    <h2>📝 Reward Log</h2>
-    <ul id="reward-log"></ul>
-  </div>
-
-  <script>
+  <h1>🎁 Reward Yourself!</h1>
+  <p>You have <strong><span id="ticketCount">0</span></strong> tickets</p>
+  <button onclick="earnTicket()">+ Earn Ticket</button>  <div class="character">
+    <div class="character-buttons">
+      <button onclick="getReward('Samira', this)">🎮 Samira</button>
+      <button onclick="getReward('Kamui', this)">🕹️ Kamui</button>
+    </div>
+    <div class="character-buttons">
+      <button onclick="getReward('Shea', this)">🍃 Shea</button>
+      <button onclick="getReward('Chrome', this)">☕ Chrome</button>
+    </div>
+    <div class="character-buttons">
+      <button onclick="getReward('Sasha', this)">🎢 Sasha</button>
+      <button onclick="getReward('Camu', this)">🌌 Camu</button>
+    </div>
+    <div class="character-buttons">
+      <button onclick="getReward('Wanshi', this)">😴 Wanshi</button>
+      <button onclick="getReward('Stephanie', this)">🕌 Stephanie</button>
+    </div>
+  </div>  <ul id="reward-log"></ul>  <script>
     const rewards = {
-      Samira: [
-        "A new game you’ve wanted for ages",
-        "A power-up skin — now go dominate!",
-        "Gaming date night — no distractions, just fun",
-        "Energy drink + game marathon permission slip",
-        "30-minute rage-free gaming pass (Samira’s rules)"
-      ],
-      Kamui: [
-        "A gift card to buy something *you* want",
-        "A chill solo gaming session, no guilt",
-        "A playlist he made just for you",
-        "New headphones to zone out the world",
-        "He watches you play for once — eyes only on you"
-      ],
-      Shea: [
-        "A walk in the park with silence + snacks",
-        "Drawing time under a tree",
-        "A flower Shea picked for you",
-        "Permission to cancel everything and just *exist*",
-        "A small picnic and cloud-watching"
-      ],
-      Chrome: [
-        "Café date with philosophical debates",
-        "A warm pastry + the *good* tea",
-        "A fancy notebook to write your dreams in",
-        "A coffee break with background jazz",
-        "An hour to just read, guilt-free"
-      ],
-      Sasha: [
-        "A spontaneous amusement park adventure",
-        "A dance break right now — she dares you!",
-        "A sugary treat + hyper chat session",
-        "She shouts your name like you're famous",
-        "30 minutes of chaos — permission to scream, laugh, go wild!"
-      ],
-      Camu: [
-        "A quiet night with your favorite playlist",
-        "A midnight walk under the stars",
-        "Permission to journal something raw",
-        "A cryptic compliment you’ll think about for days",
-        "Lights off, headphones in, and *feel* everything"
-      ],
-      Wanshi: [
-        "A 30-minute nap card — valid always",
-        "Fuzzy blanket + nothingness",
-        "Sleepy tea time with no obligations",
-        "A do-nothing day — doctor’s orders",
-        "Permission to bail and go rest"
-      ],
-      Stephanie: [
-        "A Turkish movie night — with food, of course",
-        "She teaches you a curse word (lovingly)",
-        "Baklava and a long story about her family",
-        "Dance practice — she won't take no",
-        "A reminder that you are *strong*, no matter what"
-      ]
+      Samira: ["A new game day!", "Time for a solo play session", "Steam gift card (imaginary but empowering)", "She compliments your strategy", "Double XP — you’ve earned it!"],
+      Kamui: ["A calm afternoon of handheld gaming", "A mysterious relic from an old RPG", "Kamui nods quietly in approval", "An hour of nostalgic tunes", "A mini mission: hydrate + stretch!"],
+      Shea: ["A walk among trees, real or imagined", "A leaf-shaped trinket of calm", "Deep breath challenge — 3x slow inhales", "A poetry line to carry today", "Permission to cancel everything and just *exist*"],
+      Chrome: ["Café date with philosophical debates", "A warm pastry + the *good* tea", "A fancy notebook to write your dreams in", "A coffee break with background jazz", "An hour to just read, guilt-free"],
+      Sasha: ["A spontaneous amusement park adventure", "A dance break right now — she dares you!", "A sugary treat + hyper chat session", "She shouts your name like you're famous", "30 minutes of chaos — permission to scream, laugh, go wild!"],
+      Camu: ["A quiet night with your favorite playlist", "A midnight walk under the stars", "Permission to journal something raw", "A cryptic compliment you’ll think about for days", "Lights off, headphones in, and *feel* everything"],
+      Wanshi: ["A 30-minute nap card — valid always", "Fuzzy blanket + nothingness", "Sleepy tea time with no obligations", "A do-nothing day — doctor’s orders", "Permission to bail and go rest"],
+      Stephanie: ["A Turkish movie night — with food, of course", "She teaches you a curse word (lovingly)", "Baklava and a long story about her family", "Dance practice — she won't take no", "A reminder that you are *strong*, no matter what"]
     };
 
     const themes = {
@@ -204,7 +140,7 @@
       updateDisplay();
     }
 
-    function getReward(character, button) {
+    function getReward(character, buttonElement) {
       if (tickets <= 0) {
         alert("You don't have any tickets yet! Do a hard thing first 💪");
         return;
@@ -218,34 +154,33 @@
       localStorage.setItem('tickets', tickets);
       document.body.style.setProperty('--bg', themes[character]);
       updateDisplay();
-      sparkleBurst(button);
+      sparkleBurst(buttonElement);
     }
 
     function sparkleBurst(target) {
       const rect = target.getBoundingClientRect();
-      const sparkleContainer = document.createElement('div');
-      sparkleContainer.style.position = 'absolute';
-      sparkleContainer.style.left = rect.left + window.scrollX + 'px';
-      sparkleContainer.style.top = rect.top + window.scrollY + 'px';
-      sparkleContainer.style.pointerEvents = 'none';
-      sparkleContainer.style.width = rect.width + 'px';
-      sparkleContainer.style.height = rect.height + 'px';
-      sparkleContainer.style.zIndex = 1000;
-      document.body.appendChild(sparkleContainer);
+      const container = document.createElement('div');
+      container.style.position = 'absolute';
+      container.style.left = rect.left + window.scrollX + 'px';
+      container.style.top = rect.top + window.scrollY + 'px';
+      container.style.width = rect.width + 'px';
+      container.style.height = rect.height + 'px';
+      container.style.pointerEvents = 'none';
+      container.style.zIndex = 1000;
+      document.body.appendChild(container);
 
       for (let i = 0; i < 20; i++) {
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
         sparkle.style.left = Math.random() * rect.width + 'px';
         sparkle.style.top = Math.random() * rect.height + 'px';
-        sparkleContainer.appendChild(sparkle);
+        container.appendChild(sparkle);
         setTimeout(() => sparkle.remove(), 1000);
       }
 
-      setTimeout(() => sparkleContainer.remove(), 1000);
+      setTimeout(() => container.remove(), 1000);
     }
 
     updateDisplay();
-  </script>
-</body>
+  </script></body>
 </html>
