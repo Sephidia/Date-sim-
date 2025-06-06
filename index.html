@@ -103,6 +103,28 @@
       z-index: 1000;
     }
 
+    .firework {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: red;
+  animation: explode 800ms ease-out forwards;
+  pointer-events: none;
+  z-index: 2000;
+}
+
+@keyframes explode {
+  0% {
+    transform: scale(0.5) translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.2) translate(var(--dx), var(--dy));
+    opacity: 0;
+  }
+}
+
     @keyframes sparkle {
       0% {
         transform: scale(0.5);
@@ -235,8 +257,10 @@ function earnTicket() {
   tickets++;
   localStorage.setItem('tickets', tickets);
   updateDisplay();
+  const button = document.querySelector("button[onclick='earnTicket()']");
+  celebrateEffort(button);
 }
-
+    
 function getReward(character, button) {
   if (tickets <= 0) {
     alert("You don't have any tickets yet! Do a hard thing first 💪");
@@ -316,7 +340,41 @@ function petalBurst(target) {
   setTimeout(() => petalContainer.remove(), 3000);
 }
 
+    function celebrateEffort(target) {
+  const rect = target.getBoundingClientRect();
+  const originX = rect.left + rect.width / 2 + window.scrollX;
+  const originY = rect.top + rect.height / 2 + window.scrollY;
+
+  for (let i = 0; i < 20; i++) {
+    const firework = document.createElement('div');
+    firework.className = 'firework';
+    firework.style.left = originX + 'px';
+    firework.style.top = originY + 'px';
+
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = 60 + Math.random() * 30;
+    const dx = Math.cos(angle) * distance + 'px';
+    const dy = Math.sin(angle) * distance + 'px';
+
+    firework.style.setProperty('--dx', dx);
+    firework.style.setProperty('--dy', dy);
+    firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+
+    document.body.appendChild(firework);
+    setTimeout(() => firework.remove(), 800);
+  }
+
+  const sound = document.getElementById("celebrateSound");
+  if (sound) {
+    sound.currentTime = 0;
+    sound.play();
+  }
+    }
+    
 updateDisplay();
   </script>
+
+<audio id="celebrateSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0b3b6ef6e4.mp3?filename=success-fanfare-trumpets-6185.mp3"></audio>
+  
 </body>
 </html>
