@@ -72,6 +72,15 @@
         top: -50px;
       }
     }
+    #reward-log {
+  list-style: none;
+  padding: 0;
+}
+
+#reward-log li {
+  padding: 0.5em;
+  border-bottom: 1px solid #eee;
+}
   </style>
 </head>
 <body>
@@ -88,7 +97,7 @@
     <button onclick="getReward('Stephanie')">🕌 Stephanie</button>
   </div>  <div class="log">
     <h2>📝 Reward Log</h2>
-    <div id="reward-log"></div>
+    <ul id="reward-log"></ul>
   </div>  <script>
     const rewards = {
       Samira: [
