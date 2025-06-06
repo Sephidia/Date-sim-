@@ -137,98 +137,98 @@
   </div>
 
   <script>
-    const rewards = {
-      Samira: [
-        "A new game you’ve wanted for ages",
-        "A power-up skin — now go dominate!",
-        "Gaming date night — no distractions, just fun",
-        "Energy drink + game marathon permission slip",
-        "30-minute rage-free gaming pass (Samira’s rules)"
-      ],
-      Kamui: [
-        "A gift card to buy something *you* want",
-        "A chill solo gaming session, no guilt",
-        "A playlist he made just for you",
-        "New headphones to zone out the world",
-        "He watches you play for once — eyes only on you"
-      ],
-      Shea: [
-        "A walk in the park with silence + snacks",
-        "Drawing time under a tree",
-        "A flower Shea picked for you",
-        "Permission to cancel everything and just *exist*",
-        "A small picnic and cloud-watching"
-      ],
-      Chrome: [
-        "Café date with philosophical debates",
-        "A warm pastry + the *good* tea",
-        "A fancy notebook to write your dreams in",
-        "A coffee break with background jazz",
-        "An hour to just read, guilt-free"
-      ],
-      Sasha: [
-        "A spontaneous amusement park adventure",
-        "A dance break right now — she dares you!",
-        "A sugary treat + hyper chat session",
-        "She shouts your name like you're famous",
-        "30 minutes of chaos — permission to scream, laugh, go wild!"
-      ],
-      Camu: [
-        "A quiet night with your favorite playlist",
-        "A midnight walk under the stars",
-        "Permission to journal something raw",
-        "A cryptic compliment you’ll think about for days",
-        "Lights off, headphones in, and *feel* everything"
-      ],
-      Wanshi: [
-        "A 30-minute nap card — valid always",
-        "Fuzzy blanket + nothingness",
-        "Sleepy tea time with no obligations",
-        "A do-nothing day — doctor’s orders",
-        "Permission to bail and go rest"
-      ],
-      Stephanie: [
-        "A Turkish movie night — with food, of course",
-        "She teaches you a curse word (lovingly)",
-        "Baklava and a long story about her family",
-        "Dance practice — she won't take no",
-        "A reminder that you are *strong*, no matter what"
-      ]
-    };
+ const rewards = {
+  Samira: [
+    "A new game you’ve wanted for ages",
+    "A power-up skin — now go dominate!",
+    "Gaming date night — no distractions, just fun",
+    "Energy drink + game marathon permission slip",
+    "30-minute rage-free gaming pass (Samira’s rules)"
+  ],
+  Kamui: [
+    "A gift card to buy something *you* want",
+    "A chill solo gaming session, no guilt",
+    "A playlist he made just for you",
+    "New headphones to zone out the world",
+    "He watches you play for once — eyes only on you"
+  ],
+  Shea: [
+    "A walk in the park with silence + snacks",
+    "Drawing time under a tree",
+    "A flower Shea picked for you",
+    "Permission to cancel everything and just *exist*",
+    "A small picnic and cloud-watching"
+  ],
+  Chrome: [
+    "Café date with philosophical debates",
+    "A warm pastry + the *good* tea",
+    "A fancy notebook to write your dreams in",
+    "A coffee break with background jazz",
+    "An hour to just read, guilt-free"
+  ],
+  Sasha: [
+    "A spontaneous amusement park adventure",
+    "A dance break right now — she dares you!",
+    "A sugary treat + hyper chat session",
+    "She shouts your name like you're famous",
+    "30 minutes of chaos — permission to scream, laugh, go wild!"
+  ],
+  Camu: [
+    "A quiet night with your favorite playlist",
+    "A midnight walk under the stars",
+    "Permission to journal something raw",
+    "A cryptic compliment you’ll think about for days",
+    "Lights off, headphones in, and *feel* everything"
+  ],
+  Wanshi: [
+    "A 30-minute nap card — valid always",
+    "Fuzzy blanket + nothingness",
+    "Sleepy tea time with no obligations",
+    "A do-nothing day — doctor’s orders",
+    "Permission to bail and go rest"
+  ],
+  Stephanie: [
+    "A Turkish movie night — with food, of course",
+    "She teaches you a curse word (lovingly)",
+    "Baklava and a long story about her family",
+    "Dance practice — she won't take no",
+    "A reminder that you are *strong*, no matter what"
+  ]
+};
 
-    const themes = {
-      Samira: "linear-gradient(to bottom right, #ff8cb3, #ffc1ff)",
-      Kamui: "linear-gradient(to bottom right, #c2e9fb, #a1c4fd)",
-      Shea: "linear-gradient(to bottom right, #d4fc79, #96e6a1)",
-      Chrome: "linear-gradient(to bottom right, #d7d2cc, #304352)",
-      Sasha: "linear-gradient(to bottom right, #ff6a00, #ee0979)",
-      Camu: "linear-gradient(to bottom right, #434343, #000000)",
-      Wanshi: "linear-gradient(to bottom right, #c9d6ff, #e2e2e2)",
-      Stephanie: "linear-gradient(to bottom right, #ffecd2, #fcb69f)"
-    };
+const themes = {
+  Samira: "linear-gradient(to bottom right, #ff8cb3, #ffc1ff)",
+  Kamui: "linear-gradient(to bottom right, #c2e9fb, #a1c4fd)",
+  Shea: "linear-gradient(to bottom right, #d4fc79, #96e6a1)",
+  Chrome: "linear-gradient(to bottom right, #d7d2cc, #304352)",
+  Sasha: "linear-gradient(to bottom right, #ff6a00, #ee0979)",
+  Camu: "linear-gradient(to bottom right, #434343, #000000)",
+  Wanshi: "linear-gradient(to bottom right, #c9d6ff, #e2e2e2)",
+  Stephanie: "linear-gradient(to bottom right, #ffecd2, #fcb69f)"
+};
 
-    let tickets = parseInt(localStorage.getItem('tickets')) || 0;
-    let log = JSON.parse(localStorage.getItem('log')) || [];
+let tickets = parseInt(localStorage.getItem('tickets')) || 0;
+let log = JSON.parse(localStorage.getItem('log')) || [];
 
-    function updateDisplay() {
-      document.getElementById("ticketCount").textContent = tickets;
+function updateDisplay() {
+  document.getElementById("ticketCount").textContent = tickets;
 
-      const logList = document.getElementById("reward-log");
-      logList.innerHTML = "";
-      log.slice(-5).reverse().forEach(entry => {
-        const li = document.createElement("li");
-        li.textContent = entry;
-        logList.appendChild(li);
-      });
-    }
+  const logList = document.getElementById("reward-log");
+  logList.innerHTML = "";
+  log.slice(-5).reverse().forEach(entry => {
+    const li = document.createElement("li");
+    li.textContent = entry;
+    logList.appendChild(li);
+  });
+}
 
-    function earnTicket() {
-      tickets++;
-      localStorage.setItem('tickets', tickets);
-      updateDisplay();
-    }
+function earnTicket() {
+  tickets++;
+  localStorage.setItem('tickets', tickets);
+  updateDisplay();
+}
 
-    function getReward(character) {
+function getReward(character, button) {
   if (tickets <= 0) {
     alert("You don't have any tickets yet! Do a hard thing first 💪");
     return;
@@ -243,48 +243,71 @@
   document.body.style.setProperty('--bg', themes[character]);
   updateDisplay();
 
-  const targetButton = document.querySelector(`button[onclick="getReward('${character}')"]`);
-  sparkleBurst(targetButton);
-  petalBurst(targetButton); // <-- now petals always trigger
-    }
+  sparkleBurst(button);
+  petalBurst(button);
+}
 
-      const pool = rewards[character];
-      const reward = pool[Math.floor(Math.random() * pool.length)];
-      const message = `${character} gave you: ${reward}`;
-      log.push(message);
-      localStorage.setItem('log', JSON.stringify(log));
-      tickets--;
-      localStorage.setItem('tickets', tickets);
-      document.body.style.setProperty('--bg', themes[character]);
-      updateDisplay();
-      sparkleBurst(button);
-    }
+function sparkleBurst(target) {
+  const rect = target.getBoundingClientRect();
+  const sparkleContainer = document.createElement('div');
+  sparkleContainer.style.position = 'absolute';
+  sparkleContainer.style.left = rect.left + window.scrollX + 'px';
+  sparkleContainer.style.top = rect.top + window.scrollY + 'px';
+  sparkleContainer.style.pointerEvents = 'none';
+  sparkleContainer.style.width = rect.width + 'px';
+  sparkleContainer.style.height = rect.height + 'px';
+  sparkleContainer.style.zIndex = 1000;
+  document.body.appendChild(sparkleContainer);
 
-    function sparkleBurst(target) {
-      const rect = target.getBoundingClientRect();
-      const sparkleContainer = document.createElement('div');
-      sparkleContainer.style.position = 'absolute';
-      sparkleContainer.style.left = rect.left + window.scrollX + 'px';
-      sparkleContainer.style.top = rect.top + window.scrollY + 'px';
-      sparkleContainer.style.pointerEvents = 'none';
-      sparkleContainer.style.width = rect.width + 'px';
-      sparkleContainer.style.height = rect.height + 'px';
-      sparkleContainer.style.zIndex = 1000;
-      document.body.appendChild(sparkleContainer);
+  for (let i = 0; i < 20; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = Math.random() * rect.width + 'px';
+    sparkle.style.top = Math.random() * rect.height + 'px';
+    sparkleContainer.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 1000);
+  }
 
-      for (let i = 0; i < 20; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.style.left = Math.random() * rect.width + 'px';
-        sparkle.style.top = Math.random() * rect.height + 'px';
-        sparkleContainer.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 1000);
-      }
+  setTimeout(() => sparkleContainer.remove(), 1000);
+}
 
-      setTimeout(() => sparkleContainer.remove(), 1000);
-    }
+function petalBurst(target) {
+  const rect = target.getBoundingClientRect();
+  const petalContainer = document.createElement('div');
+  petalContainer.style.position = 'absolute';
+  petalContainer.style.left = rect.left + window.scrollX + 'px';
+  petalContainer.style.top = rect.top + window.scrollY + 'px';
+  petalContainer.style.pointerEvents = 'none';
+  petalContainer.style.width = rect.width + 'px';
+  petalContainer.style.height = rect.height + 'px';
+  petalContainer.style.zIndex = 1000;
+  document.body.appendChild(petalContainer);
 
-    updateDisplay();
+  for (let i = 0; i < 15; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+    petal.style.left = Math.random() * rect.width + 'px';
+    petal.style.top = Math.random() * rect.height + 'px';
+    petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+    petalContainer.appendChild(petal);
+    // Animate petals falling down:
+    petal.animate([
+      { transform: petal.style.transform + ' translateY(0px)', opacity: 0.8 },
+      { transform: petal.style.transform + ' translateY(100px)', opacity: 0 }
+    ], {
+      duration: 2000 + Math.random() * 1000,
+      easing: 'ease-out',
+      fill: 'forwards',
+      delay: Math.random() * 500
+    });
+
+    setTimeout(() => petal.remove(), 3000);
+  }
+
+  setTimeout(() => petalContainer.remove(), 3000);
+}
+
+updateDisplay();
   </script>
 </body>
 </html>
