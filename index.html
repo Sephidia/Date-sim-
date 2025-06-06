@@ -56,6 +56,17 @@
       align-items: center;
     }
 
+    .petal {
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, #ffd6e0 30%, transparent 70%);
+  border-radius: 50% 50% 50% 50%;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.8;
+  transform: rotate(0deg);
+    }
+    
     .log {
       margin-top: 2em;
       background: white;
@@ -217,11 +228,25 @@
       updateDisplay();
     }
 
-    function getReward(character, button) {
-      if (tickets <= 0) {
-        alert("You don't have any tickets yet! Do a hard thing first 💪");
-        return;
-      }
+    function getReward(character) {
+  if (tickets <= 0) {
+    alert("You don't have any tickets yet! Do a hard thing first 💪");
+    return;
+  }
+  const pool = rewards[character];
+  const reward = pool[Math.floor(Math.random() * pool.length)];
+  const message = `${character} gave you: ${reward}`;
+  log.push(message);
+  localStorage.setItem('log', JSON.stringify(log));
+  tickets--;
+  localStorage.setItem('tickets', tickets);
+  document.body.style.setProperty('--bg', themes[character]);
+  updateDisplay();
+
+  const targetButton = document.querySelector(`button[onclick="getReward('${character}')"]`);
+  sparkleBurst(targetButton);
+  petalBurst(targetButton); // <-- now petals always trigger
+    }
 
       const pool = rewards[character];
       const reward = pool[Math.floor(Math.random() * pool.length)];
