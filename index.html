@@ -29,18 +29,31 @@
       color: white;
       font-size: 1em;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.1s ease;
     }
 
     button:hover {
       background-color: #ff5c94;
     }
 
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .character {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+      margin: 0 auto;
+      justify-content: space-between;
+    }
+
     .character-buttons {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: row;
+      width: 100%;
       justify-content: center;
-      margin-top: 2em;
+      align-items: center;
     }
 
     .log {
@@ -55,15 +68,8 @@
       text-align: left;
     }
 
-    #reward-log {
-      list-style: none;
-      padding: 0;
-      margin-top: 1em;
-    }
-
-    #reward-log li {
-      padding: 0.5em;
-      border-bottom: 1px solid #eee;
+    .log-entry {
+      margin-bottom: 0.5em;
     }
 
     .sparkle {
@@ -95,15 +101,23 @@
   <p><strong>Tickets:</strong> <span id="ticketCount">0</span></p>
   <button onclick="earnTicket()">I Did a Hard Thing!</button>
 
-  <div class="character-buttons">
-    <button onclick="getReward('Samira')">🎮 Samira</button>
-    <button onclick="getReward('Kamui')">🕹️ Kamui</button>
-    <button onclick="getReward('Shea')">🍃 Shea</button>
-    <button onclick="getReward('Chrome')">☕ Chrome</button>
-    <button onclick="getReward('Sasha')">🎢 Sasha</button>
-    <button onclick="getReward('Camu')">🌌 Camu</button>
-    <button onclick="getReward('Wanshi')">😴 Wanshi</button>
-    <button onclick="getReward('Stephanie')">🕌 Stephanie</button>
+  <div class="character">
+    <div class="character-buttons">
+      <button onclick="getReward('Samira', this)">🎮 Samira</button>
+      <button onclick="getReward('Kamui', this)">🕹️ Kamui</button>
+    </div>
+    <div class="character-buttons">
+      <button onclick="getReward('Shea', this)">🍃 Shea</button>
+      <button onclick="getReward('Chrome', this)">☕ Chrome</button>
+    </div>
+    <div class="character-buttons">
+      <button onclick="getReward('Sasha', this)">🎢 Sasha</button>
+      <button onclick="getReward('Camu', this)">🌌 Camu</button>
+    </div>
+    <div class="character-buttons">
+      <button onclick="getReward('Wanshi', this)">😴 Wanshi</button>
+      <button onclick="getReward('Stephanie', this)">🕌 Stephanie</button>
+    </div>
   </div>
 
   <div class="log">
@@ -189,8 +203,7 @@
       document.getElementById("ticketCount").textContent = tickets;
 
       const logList = document.getElementById("reward-log");
-      logList.innerHTML = ""; // Clear the list
-
+      logList.innerHTML = "";
       log.slice(-5).reverse().forEach(entry => {
         const li = document.createElement("li");
         li.textContent = entry;
@@ -204,11 +217,12 @@
       updateDisplay();
     }
 
-    function getReward(character) {
+    function getReward(character, button) {
       if (tickets <= 0) {
         alert("You don't have any tickets yet! Do a hard thing first 💪");
         return;
       }
+
       const pool = rewards[character];
       const reward = pool[Math.floor(Math.random() * pool.length)];
       const message = `${character} gave you: ${reward}`;
@@ -218,18 +232,31 @@
       localStorage.setItem('tickets', tickets);
       document.body.style.setProperty('--bg', themes[character]);
       updateDisplay();
-      sparkleBurst();
+      sparkleBurst(button);
     }
 
-    function sparkleBurst() {
+    function sparkleBurst(target) {
+      const rect = target.getBoundingClientRect();
+      const sparkleContainer = document.createElement('div');
+      sparkleContainer.style.position = 'absolute';
+      sparkleContainer.style.left = rect.left + window.scrollX + 'px';
+      sparkleContainer.style.top = rect.top + window.scrollY + 'px';
+      sparkleContainer.style.pointerEvents = 'none';
+      sparkleContainer.style.width = rect.width + 'px';
+      sparkleContainer.style.height = rect.height + 'px';
+      sparkleContainer.style.zIndex = 1000;
+      document.body.appendChild(sparkleContainer);
+
       for (let i = 0; i < 20; i++) {
         const sparkle = document.createElement('div');
         sparkle.className = 'sparkle';
-        sparkle.style.left = Math.random() * window.innerWidth + 'px';
-        sparkle.style.top = (window.innerHeight / 2 + Math.random() * 100 - 50) + 'px';
-        document.body.appendChild(sparkle);
+        sparkle.style.left = Math.random() * rect.width + 'px';
+        sparkle.style.top = Math.random() * rect.height + 'px';
+        sparkleContainer.appendChild(sparkle);
         setTimeout(() => sparkle.remove(), 1000);
       }
+
+      setTimeout(() => sparkleContainer.remove(), 1000);
     }
 
     updateDisplay();
