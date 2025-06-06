@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,6 +10,7 @@
       color: #333;
       padding: 2em;
       text-align: center;
+      overflow-x: hidden;
     }
     h1 {
       font-size: 3em;
@@ -50,14 +50,33 @@
     .log-entry {
       margin-bottom: 0.5em;
     }
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #fff 0%, #ffb6c1 80%, transparent 100%);
+      border-radius: 50%;
+      animation: sparkle 1s ease-out forwards;
+      pointer-events: none;
+      z-index: 1000;
+    }@keyframes sparkle {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+    top: -50px;
+  }
+}
+
   </style>
 </head>
 <body>
   <h1>🎀 Reward Yourself! 🎀</h1>
   <p><strong>Tickets:</strong> <span id="ticket-count">0</span></p>
-  <button onclick="earnTicket()">I Did a Hard Thing!</button>
-
-  <div class="character-buttons">
+  <button onclick="earnTicket()">I Did a Hard Thing!</button>  <div class="character-buttons">
     <button onclick="getReward('Samira')">🎮 Samira</button>
     <button onclick="getReward('Kamui')">🕹️ Kamui</button>
     <button onclick="getReward('Shea')">🍃 Shea</button>
@@ -66,14 +85,10 @@
     <button onclick="getReward('Camu')">🌌 Camu</button>
     <button onclick="getReward('Wanshi')">😴 Wanshi</button>
     <button onclick="getReward('Stephanie')">🕌 Stephanie</button>
-  </div>
-
-  <div class="log">
+  </div>  <div class="log">
     <h2>📝 Reward Log</h2>
     <div id="reward-log"></div>
-  </div>
-
-  <script>
+  </div>  <script>
     const rewards = {
       Samira: [
         "A new game you’ve wanted for ages",
@@ -167,10 +182,20 @@
       tickets--;
       localStorage.setItem('tickets', tickets);
       updateDisplay();
+      sparkleBurst();
     }
 
-    // Initial display
+    function sparkleBurst() {
+      for (let i = 0; i < 20; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = Math.random() * window.innerWidth + 'px';
+        sparkle.style.top = (window.innerHeight / 2 + Math.random() * 100 - 50) + 'px';
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 1000);
+      }
+    }
+
     updateDisplay();
-  </script>
-</body>
+  </script></body>
 </html>
