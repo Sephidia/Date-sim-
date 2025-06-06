@@ -1,138 +1,176 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OC Reward App</title>
+  <title>Reward Yourself!</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #fbeff2, #fff5f8);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(#ffeaf4, #ffd1e3);
       color: #333;
-      margin: 0;
-      padding: 2rem;
+      padding: 2em;
+      text-align: center;
     }
     h1 {
-      text-align: center;
-      color: #d6336c;
+      font-size: 3em;
+      margin-bottom: 1em;
     }
-    .ticket-counter {
-      text-align: center;
-      font-size: 1.5rem;
-      margin: 1rem 0;
-    }
-    .task-btn {
-      display: block;
-      margin: 1rem auto;
-      padding: 1rem;
-      background: #ff80ab;
-      color: white;
+    button {
+      margin: 0.5em;
+      padding: 1em 2em;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
+      background-color: #ff8cb3;
+      color: white;
+      font-size: 1em;
       cursor: pointer;
-      font-size: 1rem;
+      transition: background 0.3s;
     }
-    .rewards {
+    button:hover {
+      background-color: #ff5c94;
+    }
+    .character-buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    .character-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 1rem;
-      width: 200px;
-      text-align: center;
-    }
-    .reward-btn {
-      margin-top: 0.5rem;
-      padding: 0.5rem;
-      background: #d6336c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+      margin-top: 2em;
     }
     .log {
-      margin-top: 2rem;
-      background: #ffeaf0;
-      padding: 1rem;
+      margin-top: 2em;
+      background: white;
+      padding: 1em;
       border-radius: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .log-entry {
+      margin-bottom: 0.5em;
     }
   </style>
 </head>
 <body>
-  <h1>🎟️ OC Reward App</h1>
-  <div class="ticket-counter">Tickets: <span id="ticketCount">0</span></div>
-  <button class="task-btn" onclick="completeTask()">I Did a Hard Thing</button>  <div class="rewards">
-    <div class="character-card">
-      <h3>Samira 🎮</h3>
-      <p>Buys you a new game!</p>
-      <button class="reward-btn" onclick="claimReward('Samira', 'a new game')">Claim</button>
-    </div>
-    <div class="character-card">
-      <h3>Kamui 🕹️</h3>
-      <p>Gives you a gift card!</p>
-      <button class="reward-btn" onclick="claimReward('Kamui', 'a gift card')">Claim</button>
-    </div>
-    <div class="character-card">
-      <h3>Shea 🍃</h3>
-      <p>Invites you to the park</p>
-      <button class="reward-btn" onclick="claimReward('Shea', 'a peaceful park visit')">Claim</button>
-    </div>
-    <div class="character-card">
-      <h3>Chrome ☕</h3>
-      <p>Wants a café date</p>
-      <button class="reward-btn" onclick="claimReward('Chrome', 'a fancy café treat')">Claim</button>
-    </div>
-    <div class="character-card">
-      <h3>Sasha 🎢</h3>
-      <p>Takes you to the amusement park!</p>
-      <button class="reward-btn" onclick="claimReward('Sasha', 'a wild amusement park ride')">Claim</button>
-    </div>
-    <div class="character-card">
-      <h3>Camu 🌌</h3>
-      <p>Shares a quiet night with you</p>
-      <button class="reward-btn" onclick="claimReward('Camu', 'a night of deep vibes and music')">Claim</button>
-    </div>
-    <div class="character-card">
-      <h3>Wanshi 😴</h3>
-      <p>Naps with you</p>
-      <button class="reward-btn" onclick="claimReward('Wanshi', 'a cozy nap and chill time')">Claim</button>
-    </div>
-    <div class="character-card">
-      <h3>Stephanie 🕌</h3>
-      <p>Plans a cultural experience</p>
-      <button class="reward-btn" onclick="claimReward('Stephanie', 'a cultural food/movie/music night')">Claim</button>
-    </div>
-  </div>  <div class="log">
-    <h3>Reward Log</h3>
-    <ul id="logList"></ul>
-  </div>  <script>
-    let tickets = 0;
+  <h1>🎀 Reward Yourself! 🎀</h1>
+  <p><strong>Tickets:</strong> <span id="ticket-count">0</span></p>
+  <button onclick="earnTicket()">I Did a Hard Thing!</button>
+
+  <div class="character-buttons">
+    <button onclick="getReward('Samira')">🎮 Samira</button>
+    <button onclick="getReward('Kamui')">🕹️ Kamui</button>
+    <button onclick="getReward('Shea')">🍃 Shea</button>
+    <button onclick="getReward('Chrome')">☕ Chrome</button>
+    <button onclick="getReward('Sasha')">🎢 Sasha</button>
+    <button onclick="getReward('Camu')">🌌 Camu</button>
+    <button onclick="getReward('Wanshi')">😴 Wanshi</button>
+    <button onclick="getReward('Stephanie')">🕌 Stephanie</button>
+  </div>
+
+  <div class="log">
+    <h2>📝 Reward Log</h2>
+    <div id="reward-log"></div>
+  </div>
+
+  <script>
+    const rewards = {
+      Samira: [
+        "A new game you’ve wanted for ages",
+        "A power-up skin — now go dominate!",
+        "Gaming date night — no distractions, just fun",
+        "Energy drink + game marathon permission slip",
+        "30-minute rage-free gaming pass (Samira’s rules)"
+      ],
+      Kamui: [
+        "A gift card to buy something *you* want",
+        "A chill solo gaming session, no guilt",
+        "A playlist he made just for you",
+        "New headphones to zone out the world",
+        "He watches you play for once — eyes only on you"
+      ],
+      Shea: [
+        "A walk in the park with silence + snacks",
+        "Drawing time under a tree",
+        "A flower Shea picked for you",
+        "Permission to cancel everything and just *exist*",
+        "A small picnic and cloud-watching"
+      ],
+      Chrome: [
+        "Café date with philosophical debates",
+        "A warm pastry + the *good* tea",
+        "A fancy notebook to write your dreams in",
+        "A coffee break with background jazz",
+        "An hour to just read, guilt-free"
+      ],
+      Sasha: [
+        "A spontaneous amusement park adventure",
+        "A dance break right now — she dares you!",
+        "A sugary treat + hyper chat session",
+        "She shouts your name like you're famous",
+        "30 minutes of chaos — permission to scream, laugh, go wild!"
+      ],
+      Camu: [
+        "A quiet night with your favorite playlist",
+        "A midnight walk under the stars",
+        "Permission to journal something raw",
+        "A cryptic compliment you’ll think about for days",
+        "Lights off, headphones in, and *feel* everything"
+      ],
+      Wanshi: [
+        "A 30-minute nap card — valid always",
+        "Fuzzy blanket + nothingness",
+        "Sleepy tea time with no obligations",
+        "A do-nothing day — doctor’s orders",
+        "Permission to bail and go rest"
+      ],
+      Stephanie: [
+        "A Turkish movie night — with food, of course",
+        "She teaches you a curse word (lovingly)",
+        "Baklava and a long story about her family",
+        "Dance practice — she won't take no",
+        "A reminder that you are *strong*, no matter what"
+      ]
+    };
+
+    let tickets = parseInt(localStorage.getItem('tickets')) || 0;
+    let log = JSON.parse(localStorage.getItem('log')) || [];
 
     function updateDisplay() {
-      document.getElementById('ticketCount').textContent = tickets;
+      document.getElementById('ticket-count').innerText = tickets;
+      const logDiv = document.getElementById('reward-log');
+      logDiv.innerHTML = '';
+      log.slice().reverse().forEach(entry => {
+        const div = document.createElement('div');
+        div.className = 'log-entry';
+        div.innerText = entry;
+        logDiv.appendChild(div);
+      });
     }
 
-    function completeTask() {
+    function earnTicket() {
       tickets++;
+      localStorage.setItem('tickets', tickets);
       updateDisplay();
     }
 
-    function claimReward(character, reward) {
-      if (tickets > 0) {
-        tickets--;
-        updateDisplay();
-        const log = document.getElementById('logList');
-        const entry = document.createElement('li');
-        entry.textContent = `${character} rewarded you with ${reward}!`;
-        log.appendChild(entry);
-      } else {
-        alert("You don't have enough tickets! Do a hard thing first!");
+    function getReward(character) {
+      if (tickets <= 0) {
+        alert("You don't have any tickets yet! Do a hard thing first 💪");
+        return;
       }
+      const pool = rewards[character];
+      const reward = pool[Math.floor(Math.random() * pool.length)];
+      const message = `${character} gave you: ${reward}`;
+      log.push(message);
+      localStorage.setItem('log', JSON.stringify(log));
+      tickets--;
+      localStorage.setItem('tickets', tickets);
+      updateDisplay();
     }
-  </script></body>
+
+    // Initial display
+    updateDisplay();
+  </script>
+</body>
 </html>
