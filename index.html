@@ -33,21 +33,21 @@
       background-color: #ff5c94;
       transform: scale(1.05);
     }
-    .character {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-      align-items: center;
-      max-width: 600px;
-      margin: 0 auto;
-      margin-top: 2em;
-    }
-    .character-buttons {
-      display: flex;
-      gap: 1em;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+
+    .character-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-width: 600px;
+  margin: 2em auto;
+}
+
+.character-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+    
     .log {
       margin-top: 2em;
       background: white;
@@ -87,23 +87,23 @@
   <p><strong>Tickets:</strong> <span id="ticketCount">0</span></p>
   <button onclick="earnTicket()">I Did a Hard Thing!</button>
 
-  <div class="character">
-    <div class="character-buttons">
-      <button onclick="getReward(event, 'Samira')">🎮 Samira</button>
-      <button onclick="getReward(event, 'Kamui')">🕹️ Kamui</button>
-    </div>
-    <div class="character-buttons">
-      <button onclick="getReward(event, 'Shea')">🍃 Shea</button>
-      <button onclick="getReward(event, 'Chrome')">☕ Chrome</button>
-    </div>
-    <div class="character-buttons">
-      <button onclick="getReward(event, 'Sasha')">🎢 Sasha</button>
-      <button onclick="getReward(event, 'Camu')">🌌 Camu</button>
-    </div>
-    <div class="character-buttons">
-      <button onclick="getReward(event, 'Wanshi')">😴 Wanshi</button>
-      <button onclick="getReward(event, 'Stephanie')">🕌 Stephanie</button>
-    </div>
+  <div class="character-rows">
+  <div class="character-row">
+    <button onclick="getReward('Samira', this)">🎮 Samira</button>
+    <button onclick="getReward('Kamui', this)">🕹️ Kamui</button>
+  </div>
+  <div class="character-row">
+    <button onclick="getReward('Shea', this)">🍃 Shea</button>
+    <button onclick="getReward('Chrome', this)">☕ Chrome</button>
+  </div>
+  <div class="character-row">
+    <button onclick="getReward('Sasha', this)">🎢 Sasha</button>
+    <button onclick="getReward('Camu', this)">🌌 Camu</button>
+  </div>
+  <div class="character-row">
+    <button onclick="getReward('Wanshi', this)">😴 Wanshi</button>
+    <button onclick="getReward('Stephanie', this)">🕌 Stephanie</button>
+  </div>
   </div>
 
   <div class="log">
