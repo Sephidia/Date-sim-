@@ -66,6 +66,22 @@
   background-color: #ff5c94;
 }
     
+    @keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.character-buttons button.clicked {
+  animation: pop 0.3s ease;
+}
+    
     .log {
       margin-top: 2em;
       background: white;
@@ -228,6 +244,34 @@
         logList.appendChild(li);
       });
     }
+    
+    function getReward(character) {
+  if (tickets <= 0) {
+    alert("You don't have any tickets yet! Do a hard thing first 💪");
+    return;
+  }
+
+  // Animate the clicked button
+  const buttons = document.querySelectorAll('.character-buttons button');
+  buttons.forEach(btn => {
+  if (btn.textContent.includes(character)) {
+    btn.classList.add('clicked');
+    sparkleBurst(btn); // ✨ Add this line
+    setTimeout(() => btn.classList.remove('clicked'), 300);
+  }
+});
+
+  const pool = rewards[character];
+  const reward = pool[Math.floor(Math.random() * pool.length)];
+  const message = `${character} gave you: ${reward}`;
+  log.push(message);
+  localStorage.setItem('log', JSON.stringify(log));
+  tickets--;
+  localStorage.setItem('tickets', tickets);
+  document.body.style.setProperty('--bg', themes[character]);
+  updateDisplay();
+  sparkleBurst();
+    }
 
     function earnTicket() {
       tickets++;
@@ -252,15 +296,29 @@
       sparkleBurst();
     }
 
-    function sparkleBurst() {
-      for (let i = 0; i < 20; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.style.left = Math.random() * window.innerWidth + 'px';
-        sparkle.style.top = (window.innerHeight / 2 + Math.random() * 100 - 50) + 'px';
-        document.body.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 1000);
-      }
+    function sparkleBurst(target) {
+  const rect = target.getBoundingClientRect();
+  const sparkleContainer = document.createElement('div');
+  sparkleContainer.style.position = 'absolute';
+  sparkleContainer.style.left = rect.left + window.scrollX + 'px';
+  sparkleContainer.style.top = rect.top + window.scrollY + 'px';
+  sparkleContainer.style.pointerEvents = 'none';
+  sparkleContainer.style.width = rect.width + 'px';
+  sparkleContainer.style.height = rect.height + 'px';
+  sparkleContainer.style.zIndex = 1000;
+  document.body.appendChild(sparkleContainer);
+
+  for (let i = 0; i < 20; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = Math.random() * rect.width + 'px';
+    sparkle.style.top = Math.random() * rect.height + 'px';
+    sparkleContainer.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 1000);
+  }
+
+  setTimeout(() => sparkleContainer.remove(), 1000);
+    }
     }
 
     updateDisplay();
