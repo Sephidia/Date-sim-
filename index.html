@@ -1,7 +1,8 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reward Yourself!</title>
   <style>
     body {
@@ -13,10 +14,12 @@
       overflow-x: hidden;
       transition: background 0.6s ease;
     }
+
     h1 {
       font-size: 3em;
       margin-bottom: 1em;
     }
+
     button {
       margin: 0.5em;
       padding: 1em 2em;
@@ -28,15 +31,18 @@
       cursor: pointer;
       transition: background 0.3s;
     }
+
     button:hover {
       background-color: #ff5c94;
     }
+
     .character-buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       margin-top: 2em;
     }
+
     .log {
       margin-top: 2em;
       background: white;
@@ -48,19 +54,29 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: left;
     }
-    .log-entry {
-      margin-bottom: 0.5em;
+
+    #reward-log {
+      list-style: none;
+      padding: 0;
+      margin-top: 1em;
     }
+
+    #reward-log li {
+      padding: 0.5em;
+      border-bottom: 1px solid #eee;
+    }
+
     .sparkle {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: radial-gradient(circle, #ff66cc 0%, #ff1493 80%, transparent 100%);
-  border-radius: 50%;
-  animation: sparkle 1s ease-out forwards;
-  pointer-events: none;
-  z-index: 1000;
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #ff66cc 0%, #ff1493 80%, transparent 100%);
+      border-radius: 50%;
+      animation: sparkle 1s ease-out forwards;
+      pointer-events: none;
+      z-index: 1000;
     }
+
     @keyframes sparkle {
       0% {
         transform: scale(0.5);
@@ -72,21 +88,14 @@
         top: -50px;
       }
     }
-    #reward-log {
-  list-style: none;
-  padding: 0;
-}
-
-#reward-log li {
-  padding: 0.5em;
-  border-bottom: 1px solid #eee;
-}
   </style>
 </head>
 <body>
   <h1>🎀 Reward Yourself! 🎀</h1>
-  <p><strong>Tickets:</strong> <span id="ticket-count">0</span></p>
-  <button onclick="earnTicket()">I Did a Hard Thing!</button>  <div class="character-buttons">
+  <p><strong>Tickets:</strong> <span id="ticketCount">0</span></p>
+  <button onclick="earnTicket()">I Did a Hard Thing!</button>
+
+  <div class="character-buttons">
     <button onclick="getReward('Samira')">🎮 Samira</button>
     <button onclick="getReward('Kamui')">🕹️ Kamui</button>
     <button onclick="getReward('Shea')">🍃 Shea</button>
@@ -95,10 +104,14 @@
     <button onclick="getReward('Camu')">🌌 Camu</button>
     <button onclick="getReward('Wanshi')">😴 Wanshi</button>
     <button onclick="getReward('Stephanie')">🕌 Stephanie</button>
-  </div>  <div class="log">
+  </div>
+
+  <div class="log">
     <h2>📝 Reward Log</h2>
     <ul id="reward-log"></ul>
-  </div>  <script>
+  </div>
+
+  <script>
     const rewards = {
       Samira: [
         "A new game you’ve wanted for ages",
@@ -173,17 +186,16 @@
     let log = JSON.parse(localStorage.getItem('log')) || [];
 
     function updateDisplay() {
-  document.getElementById("ticketCount").textContent = ticketCount;
-  
-  const logList = document.getElementById("reward-log") ;
-  logList.innerHTML = ""; // Clear existing list
+      document.getElementById("ticketCount").textContent = tickets;
 
-  // Show only the last 5 entries
-  log.slice(-5).reverse().forEach(entry => {
-    const li = document.createElement("li");
-    li.textContent = entry;
-    logList.appendChild(li);
-  });
+      const logList = document.getElementById("reward-log");
+      logList.innerHTML = ""; // Clear the list
+
+      log.slice(-5).reverse().forEach(entry => {
+        const li = document.createElement("li");
+        li.textContent = entry;
+        logList.appendChild(li);
+      });
     }
 
     function earnTicket() {
@@ -221,5 +233,6 @@
     }
 
     updateDisplay();
-  </script></body>
+  </script>
+</body>
 </html>
