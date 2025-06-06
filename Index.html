@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OC Reward App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #fbeff2, #fff5f8);
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #d6336c;
+    }
+    .ticket-counter {
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+    .task-btn {
+      display: block;
+      margin: 1rem auto;
+      padding: 1rem;
+      background: #ff80ab;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .rewards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .character-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 1rem;
+      width: 200px;
+      text-align: center;
+    }
+    .reward-btn {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      background: #d6336c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .log {
+      margin-top: 2rem;
+      background: #ffeaf0;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎟️ OC Reward App</h1>
+  <div class="ticket-counter">Tickets: <span id="ticketCount">0</span></div>
+  <button class="task-btn" onclick="completeTask()">I Did a Hard Thing</button>  <div class="rewards">
+    <div class="character-card">
+      <h3>Samira 🎮</h3>
+      <p>Buys you a new game!</p>
+      <button class="reward-btn" onclick="claimReward('Samira', 'a new game')">Claim</button>
+    </div>
+    <div class="character-card">
+      <h3>Kamui 🕹️</h3>
+      <p>Gives you a gift card!</p>
+      <button class="reward-btn" onclick="claimReward('Kamui', 'a gift card')">Claim</button>
+    </div>
+    <div class="character-card">
+      <h3>Shea 🍃</h3>
+      <p>Invites you to the park</p>
+      <button class="reward-btn" onclick="claimReward('Shea', 'a peaceful park visit')">Claim</button>
+    </div>
+    <div class="character-card">
+      <h3>Chrome ☕</h3>
+      <p>Wants a café date</p>
+      <button class="reward-btn" onclick="claimReward('Chrome', 'a fancy café treat')">Claim</button>
+    </div>
+    <div class="character-card">
+      <h3>Sasha 🎢</h3>
+      <p>Takes you to the amusement park!</p>
+      <button class="reward-btn" onclick="claimReward('Sasha', 'a wild amusement park ride')">Claim</button>
+    </div>
+    <div class="character-card">
+      <h3>Camu 🌌</h3>
+      <p>Shares a quiet night with you</p>
+      <button class="reward-btn" onclick="claimReward('Camu', 'a night of deep vibes and music')">Claim</button>
+    </div>
+    <div class="character-card">
+      <h3>Wanshi 😴</h3>
+      <p>Naps with you</p>
+      <button class="reward-btn" onclick="claimReward('Wanshi', 'a cozy nap and chill time')">Claim</button>
+    </div>
+    <div class="character-card">
+      <h3>Stephanie 🕌</h3>
+      <p>Plans a cultural experience</p>
+      <button class="reward-btn" onclick="claimReward('Stephanie', 'a cultural food/movie/music night')">Claim</button>
+    </div>
+  </div>  <div class="log">
+    <h3>Reward Log</h3>
+    <ul id="logList"></ul>
+  </div>  <script>
+    let tickets = 0;
+
+    function updateDisplay() {
+      document.getElementById('ticketCount').textContent = tickets;
+    }
+
+    function completeTask() {
+      tickets++;
+      updateDisplay();
+    }
+
+    function claimReward(character, reward) {
+      if (tickets > 0) {
+        tickets--;
+        updateDisplay();
+        const log = document.getElementById('logList');
+        const entry = document.createElement('li');
+        entry.textContent = `${character} rewarded you with ${reward}!`;
+        log.appendChild(entry);
+      } else {
+        alert("You don't have enough tickets! Do a hard thing first!");
+      }
+    }
+  </script></body>
+</html>
