@@ -40,22 +40,18 @@
   display: flex;
   flex-direction: column;
   max-width: 600px;
-  justify-content: space-between;
-  margin: 0 auto; /* centers the whole container */
+  margin: 0 auto;
+  gap: 1em;
 }
 
 .character-buttons {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  align-items: center;
-  justify-content: center; /* centers buttons horizontally */
-  gap: 1em; /* space between buttons */
-  margin-bottom: 1em; /* space between rows */
+  justify-content: center;
+  gap: 1em;
 }
 
 .character-buttons button {
-  flex-grow: 1; /* makes buttons take equal width */
+  flex: 1;
   padding: 1em 0;
   font-size: 1em;
   border-radius: 12px;
@@ -127,22 +123,19 @@
     <button onclick="getReward('Samira')">🎮 Samira</button>
     <button onclick="getReward('Kamui')">🕹️ Kamui</button>
   </div>
-
   <div class="character-buttons">
     <button onclick="getReward('Shea')">🍃 Shea</button>
     <button onclick="getReward('Chrome')">☕ Chrome</button>
   </div>
-
   <div class="character-buttons">
     <button onclick="getReward('Sasha')">🎢 Sasha</button>
     <button onclick="getReward('Camu')">🌌 Camu</button>
   </div>
-
   <div class="character-buttons">
     <button onclick="getReward('Wanshi')">😴 Wanshi</button>
     <button onclick="getReward('Stephanie')">🕌 Stephanie</button>
   </div>
-</div>
+  
 
   <div class="log">
     <h2>📝 Reward Log</h2>
